@@ -13,7 +13,10 @@ uploaded_file = st.file_uploader("Upload your raw laboratory diagnostic sheet (.
 
 # THE GUARD: Only process the file if it has been uploaded
 if uploaded_file is not None:
-    df = pd.read_excel(uploaded_file)
-    st.write(df)
+    try:
+        df = pd.read_excel(uploaded_file)
+        st.write(df)
+    except Exception as e:
+        st.error(f"Error reading file: {e}")
 else:
     st.info("Please upload your .xlsx file to view the dashboard.")
